@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animals</title>
+</head>
+<body>
+    {% for i in data %}
+    Фото: {{ i.animal_photo }} <br>
+    Вид: {{ i.animal_type }} <br>
+    Кличка: {{ i.animal_name }} <br>
+    Возраст: {{ i.animal_age }} <br>
+    Вес: {{ i.animal_weight }} <br>
+    Пол: {{ i.animal_sex }} <br>
+    В приюте с: {{ i.animal_admission_date }} <br>
+    Состояние здоровья: {{ i.animal_health_status }} <br>
+    История болезней: {{ i.animal_medical_history }} <br>
+    Дата планового осмотра: {{ i.animal_checkup_date }} <br>
+    Особенности поведения: {{ i.animal_behaviour }} <br>
+    Статус животного: {{ i.animal_status }} <br>
+    Примечания: {{ i.animal_notes }} <br>
+    <br>
+    {% endfor %}
+</body>
+</html>
