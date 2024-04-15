@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Index</title>
+    <meta charset="utf-8" />
+    <title>Главная страница</title>
 </head>
 <body>
-    <p>Index</p>
+    <a class="btn btn-primary" href="/">Index</a>
     <a class="btn btn-primary" href="/animals">Animals</a>
     <a class="btn btn-primary" href="/contacts">Contacts</a>
-
-
+    <form method="POST" action="create/">
+        {% csrf_token %}
+         <h2>Наши животные</h2>
+    <table>
+        {% for animal in animals %}
+        <tr>
+            {% if animal.photo %}
+            <td><img src="{{ animal.photo.url }}" style="max-width: 200px; max-height: 200px alt="" /></td>
+            {% endif %}
+            <td>Имя: {{ animal.name }}</td>
+            <td>Возраст: {{ animal.age }}</td>
+            <td>Пол: {{ animal.sex }}</td>
+            <td>О животном: {{ animal.notes }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

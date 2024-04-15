@@ -18,10 +18,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from shelter import views
+from django.conf.urls.static import static
+from django.conf import settings
+from shelter.views import *
+
 
 urlpatterns = [
     path("", views.index),
+    path("animals/create_animal/", views.create_animal),
+    path("animals/edit_animal/<int:id>/", views.edit_animal),
+    path("animals/delete_animal/<int:id>/", views.delete_animal),
     path('admin/', admin.site.urls),
     path("animals/", views.animals),
     path("contacts/", views.contacts),
+    path("panel/", views.panel),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

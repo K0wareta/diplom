@@ -1,27 +1,103 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Animals</title>
+    <meta charset="utf-8" />
+    <title>Главная страница</title>
 </head>
 <body>
-    {% for i in data %}
-    Фото: {{ i.animal_photo }} <br>
-    Вид: {{ i.animal_type }} <br>
-    Кличка: {{ i.animal_name }} <br>
-    Возраст: {{ i.animal_age }} <br>
-    Вес: {{ i.animal_weight }} <br>
-    Пол: {{ i.animal_sex }} <br>
-    В приюте с: {{ i.animal_admission_date }} <br>
-    Состояние здоровья: {{ i.animal_health_status }} <br>
-    История болезней: {{ i.animal_medical_history }} <br>
-    Дата планового осмотра: {{ i.animal_checkup_date }} <br>
-    Особенности поведения: {{ i.animal_behaviour }} <br>
-    Статус животного: {{ i.animal_status }} <br>
-    Примечания: {{ i.animal_notes }} <br>
-    <br>
-    {% endfor %}
+    <a class="btn btn-primary" href="/">Index</a>
+    <a class="btn btn-primary" href="/animals">Animals</a>
+    <a class="btn btn-primary" href="/contacts">Contacts</a>
+    <form method="POST" action="create_animal/" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>
+        <label>Введите фото</label><br>
+        <input type="file" name="photo">
+    </p>
+    <p>
+        <label>Введите вид</label><br>
+        <select name="species">
+            <option value="Собака">Собака</option>
+            <option value="Кошка">Кошка</option>
+        </select>
+    </p>
+    <p>
+        <label>Введите кличку</label><br>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label>Введите возраст</label><br>
+        <input type="number" name="age">
+    </p>
+    <p>
+        <label>Введите вес</label><br>
+        <input type="number" name="weight">
+    </p>
+    <p>
+        <label>Введите пол</label><br>
+        <select name="sex">
+            <option value="Девочка">Девочка</option>
+            <option value="Мальчик">Мальчик</option>
+        </select>
+    </p>
+    <p>
+        <label>Введите дату поступления</label><br>
+        <input type="date" name="admission_date">
+    </p>
+    <p>
+        <label>Введите статус здоровья</label><br>
+        <input type="text" name="health_status">
+    </p>
+    <p>
+        <label>Введите историю болезни</label><br>
+        <input type="text" name="medical_history">
+    </p>
+    <p>
+        <label>Введите дату следующего осмотра</label><br>
+        <input type="date" name="checkup_date">
+    </p>
+    <p>
+        <label>Введите особенности поведения</label><br>
+        <input type="text" name="behaviour">
+    </p>
+    <p>
+        <label>Введите статус животного</label><br>
+        <input type="text" name="status">
+    </p>
+    <p>
+        <label>Введите дополнительную информацию</label><br>
+        <input type="text" name="notes">
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+
+
+    {% if animals.count > 0 %}
+    <h2>Список животных</h2>
+    <table>
+        <thead><th>Id</th><th>Фото</th><th>Вид</th><th>Имя</th><th>Возраст</th><th>Вес</th><th>Пол</th><th>Дата постановки на учет</th><th>Статус здоровья</th><th>История болезней</th><th>Следующий осмотр</th><th>Особенности поведения</th><th>Статус</th><th>Дополнительная инофрмация</th></thead>
+        {% for animal in animals %}
+        <tr>
+            <td>{{ animal.id }}</td>
+            {% if animal.photo %}
+            <td><img src="{{ animal.photo.url }}" style="max-width: 200px; max-height: 200px alt="" /></td>
+            {% endif %}
+            <td>{{ animal.species }}</td>
+            <td>{{ animal.name }}</td>
+            <td>{{ animal.age }}</td>
+            <td>{{ animal.weight }}</td>
+            <td>{{ animal.sex }}</td>
+            <td>{{ animal.admission_date }}</td>
+            <td>{{ animal.health_status }}</td>
+            <td>{{ animal.medical_history }}</td>
+            <td>{{ animal.checkup_date }}</td>
+            <td>{{ animal.behaviour }}</td>
+            <td>{{ animal.status }}</td>
+            <td>{{ animal.notes }}</td>
+            <td><a href="edit_animal/{{animal.id}}">Изменить</a> | <a href="delete_animal/{{animal.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
 </body>
 </html>

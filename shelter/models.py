@@ -2,60 +2,67 @@ from django.db import models
 
 
 class Volunteer(models.Model):  # Привести в порядок
-    volunteer_name = models.CharField(max_length=300)
-    volunteer_phone = models.CharField(max_length=300)
-    volunteer_rights = models.CharField(max_length=300)
-    volunteer_regime = models.CharField(max_length=300)
+    name = models.CharField(max_length=300)
+    phone = models.CharField(max_length=300)
+    rights = models.CharField(max_length=300)
+    regime = models.CharField(max_length=300)
 
 
-ANIMAL_TYPES = {
-    ('CAT', 'Кошка'),
-    ('DOG', 'Собака')
+SPECIES = {
+    ('Кошка', 'Кошка'),
+    ('Собака', 'Собака')
 }
 
-ANIMAL_SEX = {
-    ('FEMALE', 'Девочка'),
-    ('MALE', 'Мальчик')
+SEX = {
+    ('Девочка', 'Девочка'),
+    ('Мальчик', 'Мальчик')
 }
 
 
-class Animal(models.Model):  # Привести в порядок
-    animal_photo = models.ImageField(blank=True)
-    animal_type = models.CharField(choices=ANIMAL_TYPES, max_length=300)
-    animal_name = models.CharField(max_length=300)
-    animal_age = models.IntegerField()
-    animal_weight = models.IntegerField()
-    animal_sex = models.CharField(choices=ANIMAL_SEX, max_length=300)
-    animal_admission_date = models.DateField()
-    animal_health_status = models.CharField(max_length=300)
-    animal_medical_history = models.CharField(max_length=300)
-    animal_checkup_date = models.DateField()
-    animal_behaviour = models.CharField(max_length=300)
-    animal_status = models.CharField(max_length=300)
-    animal_notes = models.CharField(max_length=300)
+class Animal(models.Model):
+    photo = models.ImageField(blank=True, upload_to='images/')
+    species = models.CharField(choices=SPECIES, max_length=300)
+    name = models.CharField(max_length=300)
+    age = models.IntegerField()
+    weight = models.IntegerField()
+    sex = models.CharField(choices=SEX, max_length=300)
+    admission_date = models.DateField()
+    health_status = models.CharField(max_length=300)
+    medical_history = models.CharField(max_length=300)
+    checkup_date = models.DateField()
+    behaviour = models.CharField(max_length=300)
+    status = models.CharField(max_length=300)
+    notes = models.CharField(max_length=300)
 
     def __str__(self):
-         return self.animal_name
+        return self.name
+
 
 JOB = {
-    ('DIR', 'director'),  # босс
-    ('ACC', 'accountant'),  # бухгалтерия, ивенты
-    ('SOC', 'socializer'),  # социализация животных
-    ('VET', 'vet'),  # ветеринар
-    ('COORD', 'volunteer_coordinator'),  # координатор волонтеров
-    ('ADOPT', 'adoption_specialist'),  # специалист по усыновлению + PR
-    ('HAND', 'handyman')  # разнорабочий
+    ('Директор', 'Директор'),
+    ('Бухгалтер', 'Бухгалтер'),
+    ('Социализатор', 'Социализатор'),
+    ('Ветеринар', 'Ветеринар'),
+    ('Координатор волонеров', 'Координатор волонеров'),
+    ('Специалист по усыновлению', 'Специалист по усыновлению'),
+    ('Разнорабочий', 'Разнорабочий')
 }
 
 
 class Administration(models.Model):
-    admin_name = models.CharField(max_length=300)
-    admin_job = models.CharField(choices=JOB, max_length=300)
-    admin_salary = models.IntegerField()
+    name = models.CharField(max_length=300)
+    job = models.CharField(choices=JOB, max_length=300)
+    salary = models.IntegerField()
+
+    def __str__(self):
+        return self.name
 
 
 class Resources(models.Model):
-    resources_money = models.IntegerField()
-    resources_meds = models.IntegerField()
-    resources_cat_food = models.IntegerField()
-    resources_dog_food = models.IntegerField()
+    money = models.FloatField()
+    meds = models.FloatField()
+    cat_food = models.FloatField()
+    dog_food = models.FloatField()
+
+    def __str__(self):
+        return 'resource'
