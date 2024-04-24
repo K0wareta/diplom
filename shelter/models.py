@@ -1,11 +1,14 @@
 from django.db import models
+from phone_field import PhoneField
 
 
 class Volunteer(models.Model):  # Привести в порядок
     name = models.CharField(max_length=300)
-    phone = models.CharField(max_length=300)
+    phone = PhoneField(help_text='Contact phone number', max_length=11)
     rights = models.CharField(max_length=300)
     regime = models.CharField(max_length=300)
+    def __str__(self):
+        return self.name
 
 
 SPECIES = {
@@ -66,3 +69,5 @@ class Resources(models.Model):
 
     def __str__(self):
         return 'resource'
+
+

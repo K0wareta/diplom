@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from shelter.models import Animal, Resources, Administration
+from shelter.models import Animal, Resources, Administration, Volunteer
 from .forms import AnimalForm
-
 
 
 def animals(request):
@@ -12,6 +11,7 @@ def animals(request):
 
 def contacts(request):
     return render(request, "contacts.html")
+
 
 def panel(request):
     workers = Administration.objects.all()
@@ -60,7 +60,6 @@ def panel(request):
                     total_cat_food += food_amount
                     break
 
-
     salary_arr = []
     for i in workers:
         salary_arr.append(i.salary)
@@ -69,7 +68,8 @@ def panel(request):
     meds = resources.meds // (total_animals * 10)
     cat_food = resources.cat_food // (total_cat_food / 1000)
     dog_food = resources.dog_food // (total_dog_food / 1000)
-    return render(request, "panel.html", {"resources": resources, "money": money, "meds": meds, "cat_food": cat_food, "dog_food": dog_food})
+    return render(request, "panel.html",
+                  {"resources": resources, "money": money, "meds": meds, "cat_food": cat_food, "dog_food": dog_food})
 
 
 def index(request):
@@ -115,3 +115,6 @@ def delete_animal(request, id):
         return HttpResponseNotFound("<h2>Animal not found</h2>")
 
 
+def volunteers(request):
+    volunteers = Volunteer.objects.all()
+    return render(request, 'volunteers.html', {"volunteers": volunteers})

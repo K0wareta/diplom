@@ -32,6 +32,7 @@ urlpatterns = [
     path("animals/", views.animals),
     path("contacts/", views.contacts),
     path("panel/", views.panel),
+    path("volunteers/", views.volunteers)
 ]
 
 if settings.DEBUG:
