@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>edit</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <label>Введите фото</label><br>
+            <input type="file" name="photo" value="{{ animal.photo.url }}" />
+        </p>
+        <p>
+            <label>Введите вид</label><br>
+            <select name="species" >
+            <option value="Собака">Собака</option>
+            <option value="Кошка">Кошка</option>
+            </select>
+        </p>
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="name" value="{{ animal.name }}" />
+        </p>
+        <p>
+            <label>Введите возраст</label><br>
+            <input type="number" name="age" value="{{ animal.age }}" />
+        </p>
+        <p>
+            <label>Введите вес</label><br>
+            <input type="number" name="weight" value="{{ animal.weight }}" />
+        </p>
+        <p>
+            <label>Введите пол</label><br>
+            <select name="sex" >
+            <option value="Девочка">Девочка</option>
+            <option value="Мальчик">Мальчик</option>
+            </select>
+        </p>
+        <p>
+            <label>Введите дату постановки</label><br>
+            <input type="date" name="admission_date" value="{{animal.admission_date }}" />
+        </p>
+        <p>
+            <label>Введите статус здоровья</label><br>
+            <input type="text" name="health_status" value="{{ animal.health_status }}" />
+        </p>
+        <p>
+            <label>Введите историю болезней</label><br>
+            <input type="text" name="medical_history" value="{{ animal.medical_history }}" />
+        </p>
+        <p>
+            <label>Введите дату следующего осмотра </label><br>
+            <input type="date" name="checkup_date" value="{{ animal.checkup_date }}" />
+        </p>
+        <p>
+            <label>Введите особенности поведения</label><br>
+            <input type="text" name="behaviour" value="{{ animal.behaviour }}" />
+        </p>
+        <p>
+            <label>Введите статус</label><br>
+            <input type="text" name="status" value="{{ animal.status }}" />
+        </p>
+        <p>
+            <label>Введите дополнительную информацию</label><br>
+            <input type="text" name="notes" value="{{ animal.notes }}" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>

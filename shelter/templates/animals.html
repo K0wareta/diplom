@@ -1,8 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title>Главная страница</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
 </head>
 <body>
     <a class="btn btn-primary" href="/">Index</a>
@@ -82,7 +85,7 @@
         <tr>
             <td>{{ animal.id }}</td>
             {% if animal.photo %}
-            <td><img src="{{ animal.photo.url }}" style="max-width: 200px; max-height: 200px alt="" /></td>
+            <td><img src="{{ animal.photo.url }}" style="width: 200px; height: 200px;" alt="" /></td>
             {% endif %}
             <td>{{ animal.species }}</td>
             <td>{{ animal.name }}</td>

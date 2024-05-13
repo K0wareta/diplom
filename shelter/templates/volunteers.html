@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Волонтеры</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+</head>
+<body>
+    <a class="btn btn-primary" href="/">Index</a>
+    <a class="btn btn-primary" href="/animals">Animals</a>
+    <a class="btn btn-primary" href="/contacts">Contacts</a>
+    <a class="btn btn-primary" href="/panel">Panel</a>
+    <a class="btn btn-primary" href="/volunteers">Volunteers</a>
+    {% for volunteer in volunteers %}
+        <br>
+        {{ volunteer.name }} <br>
+        {{ volunteer.phone }} <br>
+        {{ volunteer.rights }} <br>
+        {{ volunteer.regime }} <br>
+    {% endfor %}
+</body>
+</html>

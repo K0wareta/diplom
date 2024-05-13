@@ -32,7 +32,8 @@ urlpatterns = [
     path("animals/", views.animals),
     path("contacts/", views.contacts),
     path("panel/", views.panel),
-    path("volunteers/", views.volunteers)
+    path("volunteers/", views.volunteers),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:

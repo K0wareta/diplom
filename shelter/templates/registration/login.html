@@ -1,0 +1,24 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <main>
+    {% block content %}
+    <p>На главную страницу</p>
+    <a class="btn btn-primary" href="/">Index</a>
+    <h2>Log In</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit">Log In</button>
+    </form>
+    {% endblock %}
+  </main>
+</body>
+
+</html>
